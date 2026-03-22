@@ -1,0 +1,103 @@
+--- TABLE: clients ---
+  id - int(11)
+  nom - varchar(200)
+  telephone - varchar(20)
+  email - varchar(100)
+  adresse - text
+  historique_achats - decimal(10,2)
+  created_at - timestamp
+
+--- TABLE: details_vente ---
+  id - int(11)
+  vente_id - int(11)
+  medicament_id - int(11)
+  quantite - int(11)
+  prix_unitaire - decimal(10,2)
+  total - decimal(10,2)
+
+--- TABLE: fournisseurs ---
+  id - int(11)
+  nom - varchar(200)
+  contact - varchar(50)
+  email - varchar(100)
+  adresse - text
+  telephone - varchar(20)
+  created_at - timestamp
+
+--- TABLE: medicaments ---
+  id - int(11)
+  nom - varchar(200)
+  matiere_active - varchar(255)
+  description - text
+  code - varchar(50)
+  quantite - int(11)
+  seuil_minimum - int(11)
+  prix_achat - decimal(10,2)
+  prix_vente - decimal(10,2)
+  date_peremption - date
+  fournisseur_id - int(11)
+  categorie - varchar(100)
+  created_at - timestamp
+  updated_at - timestamp
+
+--- TABLE: mouvements_stock ---
+  id - int(11)
+  medicament_id - int(11)
+  type - enum('entrée','sortie','ajustement')
+  quantite - int(11)
+  quantite_avant - int(11)
+  quantite_apres - int(11)
+  motif - varchar(200)
+  utilisateur_id - int(11)
+  reference - varchar(100)
+  created_at - timestamp
+
+--- TABLE: prescriptions ---
+  id - int(11)
+  docteur_nom - varchar(100)
+  patient_nom - varchar(100)
+  description - text
+  fichier_path - varchar(255)
+  statut - enum('attente','prepare','termine')
+  created_at - timestamp
+
+--- TABLE: reservations ---
+  id - int(11)
+  client_id - int(11)
+  medicament_id - int(11)
+  quantite - int(11)
+  statut - enum('reserve','recupere','annule')
+  date_recuperation_prevue - date
+  created_at - timestamp
+
+--- TABLE: users ---
+  id - int(11)
+  username - varchar(50)
+  email - varchar(100)
+  password - varchar(255)
+  full_name - varchar(100)
+  user_role - enum('admin','staff')
+  last_login - datetime
+  created_at - timestamp
+
+--- TABLE: utilisateurs ---
+  id - int(11)
+  nom - varchar(100)
+  email - varchar(100)
+  mot_de_passe - varchar(255)
+  role - enum('admin','caissier','pharmacien')
+  created_at - timestamp
+  is_active - tinyint(1)
+
+--- TABLE: ventes ---
+  id - int(11)
+  numero_facture - varchar(50)
+  client_id - int(11)
+  total - decimal(10,2)
+  remise - decimal(10,2)
+  total_final - decimal(10,2)
+  mode_paiement - enum('cash','carte','mobile')
+  statut - enum('pending','completed','cancelled')
+  utilisateur_id - int(11)
+  created_at - timestamp
+
